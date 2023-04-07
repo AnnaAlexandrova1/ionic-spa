@@ -27,5 +27,10 @@ export interface IBeerItem {
 
 export interface ISelected {
     page: number,
-    id: number
+    id: number | ''
+}
+
+export interface IStatus {
+    loading: boolean, 
+    error: boolean
 }
