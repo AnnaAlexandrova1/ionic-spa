@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getBeerList } from "../../service/api/requests";
 import {
   IonPage,
@@ -20,6 +21,9 @@ export default function MainPage() {
   const [beerList, setBeerList] = useState<any | []>([]);
   const [loading, setLoading] = useState<Boolean>(true);
   const [error, setError] = useState<Boolean>(false);
+  
+
+  const navigate = useNavigate()
 
   const getBeer = () => {
     getBeerList(page)
@@ -51,6 +55,10 @@ export default function MainPage() {
   const handleOnPageClick = (elem: number) => {
     setPage(elem);
   };
+
+  const handleOnCardClick = (elem: number) => {
+      navigate(`/itemPage`)
+  }
 
   return (
     <IonPage>

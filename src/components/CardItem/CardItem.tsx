@@ -1,4 +1,5 @@
 import React from "react";
+
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton } from '@ionic/react'
 import { IBeerItem } from "../../service/interfaces/interfaces";
 import './cardItem.css'
@@ -9,8 +10,11 @@ interface CartItemProps {
 
 
 export default function CartItem({ item }: CartItemProps) {
+
   return (
-      <IonCard color='light' className='ion-card'>
+    <IonCard color='light'
+      className='ion-card'
+      onClick={() => {}}>
        <IonCardHeader>
             <IonCardTitle>
               {item.name}

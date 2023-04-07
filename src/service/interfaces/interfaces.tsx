@@ -24,3 +24,8 @@ export interface IBeerItem {
     brewers_tips: String,
     contributed_by: String,
 }
+
+export interface ISelected {
+    page: number,
+    id: number
+}
