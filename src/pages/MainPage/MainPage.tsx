@@ -1,46 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getBeerList } from "../../service/api/requests";
+import React from "react";
 import {
   IonPage,
-  IonGrid,
-  IonRow,
-  IonCol,
   IonContent,
   IonList,
   IonItem,
 } from "@ionic/react";
-import { IBeerList, ISelected, IStatus } from "../../service/interfaces/interfaces";
+import { ISelected, IStatus } from "../../service/interfaces/interfaces";
 import CartItem from "../../components/CardItem/CardItem";
 import Loading from "../../components/Loading/Loading";
 import Error from "../../components/Error/Error";
 import Pagination from "../../components/Pagination/Pagination";
 
-export default function MainPage() {
-  const [selected, setSelected] = useState<ISelected>({page: 1, id: ''});
-  const [beerList, setBeerList] = useState<any | []>([]);
-  const [status, setStatus] = useState<IStatus>({loading: true, error: false});
-  
-  const navigate = useNavigate()
+interface MainPageProps {
+  selected: ISelected,
+  beerList: any | [],
+  status: IStatus, 
+  handleOnPageClick: Function, 
+  handleOnCardClick: Function
+}
 
-  const getBeer = () => {
-    getBeerList(selected.page)
-      .then((res) => {
-        setBeerList(res);
-        setStatus({...status, loading: false});
-      })
-      .catch((err) => {
-        setStatus({...status, error: true});;
-      });
-  };
 
-  useEffect(() => {
-    getBeer();
-  }, []);
-
-   useEffect(() => {
-    getBeer();
-  }, [selected.page]);
+export default function MainPage({ selected, beerList, status, handleOnPageClick, handleOnCardClick }: MainPageProps) {
 
   if (status.loading) {
     return <Loading />;
@@ -50,16 +30,7 @@ export default function MainPage() {
     return <Error />;
   }
 
-  const handleOnPageClick = (elem: number) => {
-    setSelected({...selected, page:elem});
-  };
 
-  const handleOnCardClick = (num: number) => {
-    setSelected({...selected, id: num});
-    navigate(`/itemPage`)
-  }
- 
-  console.log(selected.id)
   return (
     <IonPage>
       <IonContent>
