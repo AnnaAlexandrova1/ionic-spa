@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/ionic-spa/static/css/main.16175176.css",
+    "main.js": "/ionic-spa/static/js/main.8670f6f9.js",
+    "static/js/443.b0af193e.chunk.js": "/ionic-spa/static/js/443.b0af193e.chunk.js",
+    "static/js/738.16670712.chunk.js": "/ionic-spa/static/js/738.16670712.chunk.js",
+    "static/js/372.cc1c1f91.chunk.js": "/ionic-spa/static/js/372.cc1c1f91.chunk.js",
+    "static/js/856.5ec76ac9.chunk.js": "/ionic-spa/static/js/856.5ec76ac9.chunk.js",
+    "static/js/22.64a50bee.chunk.js": "/ionic-spa/static/js/22.64a50bee.chunk.js",
+    "static/js/344.9a0c8f43.chunk.js": "/ionic-spa/static/js/344.9a0c8f43.chunk.js",
+    "static/js/841.b408481a.chunk.js": "/ionic-spa/static/js/841.b408481a.chunk.js",
+    "static/js/186.31a015d6.chunk.js": "/ionic-spa/static/js/186.31a015d6.chunk.js",
+    "static/media/logo.jpg": "/ionic-spa/static/media/logo.728066e69757cdd8e4be.jpg",
+    "index.html": "/ionic-spa/index.html",
+    "main.16175176.css.map": "/ionic-spa/static/css/main.16175176.css.map",
+    "main.8670f6f9.js.map": "/ionic-spa/static/js/main.8670f6f9.js.map",
+    "443.b0af193e.chunk.js.map": "/ionic-spa/static/js/443.b0af193e.chunk.js.map",
+    "738.16670712.chunk.js.map": "/ionic-spa/static/js/738.16670712.chunk.js.map",
+    "372.cc1c1f91.chunk.js.map": "/ionic-spa/static/js/372.cc1c1f91.chunk.js.map",
+    "856.5ec76ac9.chunk.js.map": "/ionic-spa/static/js/856.5ec76ac9.chunk.js.map",
+    "22.64a50bee.chunk.js.map": "/ionic-spa/static/js/22.64a50bee.chunk.js.map",
+    "344.9a0c8f43.chunk.js.map": "/ionic-spa/static/js/344.9a0c8f43.chunk.js.map",
+    "841.b408481a.chunk.js.map": "/ionic-spa/static/js/841.b408481a.chunk.js.map",
+    "186.31a015d6.chunk.js.map": "/ionic-spa/static/js/186.31a015d6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.16175176.css",
+    "static/js/main.8670f6f9.js"
+  ]
+}
