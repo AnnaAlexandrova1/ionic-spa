@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ISelected, IStatus } from "./service/interfaces/interfaces";
+import { ISelected, IStatus, IBeerItem, IBeerList  } from "./service/interfaces/interfaces";
 import { getBeerList } from './service/api/requests'
 import "@ionic/react/css/core.css";
 import { Routes, Route } from "react-router";
@@ -14,8 +14,8 @@ import "./App.css";
 setupIonicReact();
 
 function App() {
-  const [selected, setSelected] = useState<ISelected>({ page: 1, id: "" });
-  const [beerList, setBeerList] = useState<any | []>([]);
+  const [selected, setSelected] = useState<ISelected>({ page: 1, id: "", beerItem: '' });
+  const [beerList, setBeerList] = useState<IBeerList | []>([]);
   const [status, setStatus] = useState<IStatus>({ loading: true, error: false, });
 
   const navigate = useNavigate()
@@ -44,10 +44,12 @@ function App() {
   };
   
   const handleOnCardClick = (num: number) => {
-    setSelected({ ...selected, id: num });
+    const e: IBeerItem = beerList.filter((item) => item.id === num)
+    setSelected({ ...selected, id: num, beerItem: e[0] });
     navigate(`/itemPage`);
   };
 
+  console.log(selected.beerItem)
   return (
     <IonApp>
       <IonHeader>
@@ -60,7 +62,7 @@ function App() {
         <Routes>
           <Route path="/" index element={<MainPage selected={selected} beerList={beerList} status={status}
             handleOnPageClick={handleOnPageClick} handleOnCardClick={handleOnCardClick} />} />
-          <Route path="itemPage" element={<ItemPage />} />
+          <Route path="itemPage" element={<ItemPage beerItem={selected.beerItem} />} />
         </Routes>
       </IonContent>
     </IonApp>

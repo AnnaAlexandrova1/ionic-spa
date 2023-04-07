@@ -5,7 +5,7 @@ import { IBeerItem } from "../../service/interfaces/interfaces";
 import './cardItem.css'
 
 interface CartItemProps {
-  item: IBeerItem, 
+  item: IBeerItem,
   handleOnCardClick: Function
 }
 
@@ -26,8 +26,9 @@ export default function CartItem({ item, handleOnCardClick }: CartItemProps) {
 
           </IonCardHeader>
           <IonCardContent>
-            <img className='card-image'  alt="Silhouette of mountains" src={item.image_url} />
-          </IonCardContent>
+        <img className='card-image' alt={item.name} src={item.image_url} />
+      </IonCardContent>
+      
         </IonCard>
   );
 }

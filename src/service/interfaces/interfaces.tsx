@@ -27,7 +27,8 @@ export interface IBeerItem {
 
 export interface ISelected {
     page: number,
-    id: number | ''
+    id: number | '', 
+    beerItem: '' | IBeerItem
 }
 
 export interface IStatus {

@@ -1,0 +1,24 @@
+
+.item-page-header{
+   text-align: center;
+}
+
+.card-content-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.card-content-item {
+    margin-top: 20px;
+    font-weight: 800;
+}
+
+.item-page-image {
+    margin-bottom: 20px;
+}
+
+.itempage-button-block {
+    margin: 20px;
+    display: flex;
+    justify-content: end;
+}
