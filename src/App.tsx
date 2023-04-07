@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router";
 
 import { IonApp, IonHeader, IonContent } from "@ionic/react";
 import { setupIonicReact } from "@ionic/react";
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { getBeerList } from './service/api/requests'
 import { ISelected, IStatus, IBeerItem, IBeerList } from "./service/interfaces/interfaces";

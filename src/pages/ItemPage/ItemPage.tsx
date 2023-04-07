@@ -18,11 +18,15 @@ interface ItemPageProps {
 }
 
 export default function ItemPage({ beerItem }: ItemPageProps) {
-  const { selected, addSelected } = useStorage();
+  const { selected, addSelected, removeSelected} = useStorage();
 
   const addBeer = async (item: IBeerItem) => {
     await addSelected(item);
-  };
+    };
+    
+  const deleteBeer = async (id: number) => {
+    await removeSelected(id);
+    };
 
   return (
     <IonCard color="light" className="itempage-card">
@@ -54,7 +58,12 @@ export default function ItemPage({ beerItem }: ItemPageProps) {
         <IonButton onClick={() => addBeer(beerItem)}>
           Добавить в избранное
           <IonIcon slot="end" icon={star}></IonIcon>
-        </IonButton>
+              </IonButton>
+{/*               
+              <IonButton onClick={() => deleteBeer(beerItem.id)}>
+       Удалить
+          <IonIcon slot="end" icon={star}></IonIcon>
+        </IonButton> */}
       </div>
     </IonCard>
   );
