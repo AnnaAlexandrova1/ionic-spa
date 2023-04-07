@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router";
 
-import { IonApp, IonHeader, IonContent } from "@ionic/react";
+import { IonApp, IonHeader, IonContent, IonButton } from "@ionic/react";
+import { star } from "ionicons/icons";
 import { setupIonicReact } from "@ionic/react";
 
 import { getBeerList } from './service/api/requests'
 import { ISelected, IStatus, IBeerItem, IBeerList } from "./service/interfaces/interfaces";
 import MainPage from "./pages/MainPage/MainPage";
 import ItemPage from "./pages/ItemPage/ItemPage";
+import SelectedModal from "./pages/SelectedModal/SelectedModal";
 import Logo from "./components/Logo/Logo";
 
 import "@ionic/react/css/core.css";
@@ -21,6 +23,7 @@ function App() {
   const [selected, setSelected] = useState<ISelected>({ page: 1, id: "", beerItem: '' });
   const [beerList, setBeerList] = useState<IBeerList | []>([]);
   const [status, setStatus] = useState<IStatus>({ loading: true, error: false, });
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate()
 
@@ -52,12 +55,22 @@ function App() {
     setSelected({ ...selected, id: num, beerItem: e });
     navigate(`/itemPage`);
   };
-
+  
+  const showModal = () => {
+    if (isOpen) {
+      return <SelectedModal isOpen={isOpen} setIsOpen={setIsOpen} />
+    } else {
+      return null
+    }
+  }
+  
   return (
     <IonApp>
+      {showModal()}
       <IonHeader>
         <div className="header-container">
           <Logo />
+          <IonButton color='medium' onClick={() => setIsOpen(true)}>Избранное</IonButton>
         </div>
       </IonHeader>
 

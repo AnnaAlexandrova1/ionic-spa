@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import { IBeerItem } from "../../service/interfaces/interfaces";
 import {
   IonCard,
@@ -9,24 +10,26 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import { star } from "ionicons/icons";
+import { star, arrowBack } from "ionicons/icons";
 import "./itemPage.css";
 import { useStorage } from "../../hooks/useStorage";
 
 interface ItemPageProps {
-  beerItem: IBeerItem;
+  beerItem: IBeerItem | ''
 }
 
 export default function ItemPage({ beerItem }: ItemPageProps) {
-  const { selected, addSelected, removeSelected} = useStorage();
+  const { selected, addSelected, removeSelected } = useStorage();
+  const navigate = useNavigate()
 
   const addBeer = async (item: IBeerItem) => {
     await addSelected(item);
-    };
-    
-  const deleteBeer = async (id: number) => {
-    await removeSelected(id);
-    };
+  };
+
+
+  if (beerItem === '') {
+    return (<div>Что-то пошло не так</div>)
+  }
 
   return (
     <IonCard color="light" className="itempage-card">
@@ -55,15 +58,16 @@ export default function ItemPage({ beerItem }: ItemPageProps) {
         </div>
       </IonCardContent>
       <div className="itempage-button-block">
-        <IonButton onClick={() => addBeer(beerItem)}>
+        <IonButton onClick={() => addBeer(beerItem)} color='success' >
           Добавить в избранное
           <IonIcon slot="end" icon={star}></IonIcon>
-              </IonButton>
-{/*               
-              <IonButton onClick={() => deleteBeer(beerItem.id)}>
-       Удалить
-          <IonIcon slot="end" icon={star}></IonIcon>
-        </IonButton> */}
+        </IonButton>
+      </div>
+      <div className="itempage-button-block">
+        <IonButton onClick={() => navigate(`/`)} color='medium'>
+          Назад
+          <IonIcon slot="start" icon={arrowBack}></IonIcon>
+        </IonButton>
       </div>
     </IonCard>
   );
