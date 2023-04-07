@@ -18,7 +18,11 @@ interface ItemPageProps {
 }
 
 export default function ItemPage({ beerItem }: ItemPageProps) {
-   const { todos } = useStorage()
+  const { selected, addSelected } = useStorage();
+
+  const addBeer = async (item: IBeerItem) => {
+    await addSelected(item);
+  };
 
   return (
     <IonCard color="light" className="itempage-card">
@@ -47,14 +51,10 @@ export default function ItemPage({ beerItem }: ItemPageProps) {
         </div>
       </IonCardContent>
       <div className="itempage-button-block">
-        <IonButton>
+        <IonButton onClick={() => addBeer(beerItem)}>
           Добавить в избранное
           <IonIcon slot="end" icon={star}></IonIcon>
-              </IonButton>
-              
-              {todos.map((todo, key) => (
-                  <p>TEST</p>
-              ))}
+        </IonButton>
       </div>
     </IonCard>
   );

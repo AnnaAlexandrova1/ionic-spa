@@ -6,7 +6,7 @@ const TODOS_KEY = 'my-todos'
 
 export function useStorage() {
     const [store, setStore] = useState<Storage>()
-    const [todos, setTodos] = useState<IBeerItem[]>([])
+    const [selected, setSelected] = useState<IBeerItem[]>([])
 
     useEffect(() => {
         const initStorage = async () => {
@@ -17,12 +17,19 @@ export function useStorage() {
             setStore(store)
 
             const storedTodos = await store.get(TODOS_KEY) || []
-            setTodos(storedTodos)
+            setSelected(storedTodos)
         }
         initStorage()
     }, [])
 
+    const addSelected = async (item: IBeerItem) => {
+        const newSelected = item;
+        setSelected([...selected, newSelected])
+        console.log(selected)
+        store?.set(TODOS_KEY, selected)
+    }
+
     return {
-        todos
+        selected, addSelected
     }
 }
