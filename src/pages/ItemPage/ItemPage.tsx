@@ -93,7 +93,7 @@ export default function ItemPage({ beerItem }: ItemPageProps) {
       </div>
 
       <div className="itempage-button-block">
-        <IonButton onClick={() => navigate(`/`)} color="medium">
+        <IonButton onClick={() => navigate(`/main`)} color="medium">
           Назад
           <IonIcon slot="start" icon={arrowBack}></IonIcon>
         </IonButton>

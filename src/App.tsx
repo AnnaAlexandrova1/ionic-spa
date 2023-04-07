@@ -65,7 +65,7 @@ function App() {
   const handleOnCardClick = (num: number) => {
     const e: IBeerItem = beerList.filter((item) => item.id === num)[0];
     setSelected({ ...selected, id: num, beerItem: e });
-    navigate(`/itemPage`);
+    navigate(`/main/itemPage`);
   };
 
   const showModal = () => {
@@ -80,7 +80,7 @@ function App() {
     <IonApp>
       {showModal()}
       <Routes>
-        <Route path="/" element={<Layout setIsOpen={setIsOpen} />}>
+        <Route path="/main" element={<Layout setIsOpen={setIsOpen} />}>
           <Route
             index
             element={
@@ -94,7 +94,7 @@ function App() {
             }
           />
           <Route
-            path="itemPage"
+            path="/main/itemPage"
             element={<ItemPage beerItem={selected.beerItem} />}
           />
         </Route>
