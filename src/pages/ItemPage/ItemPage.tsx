@@ -15,21 +15,48 @@ import "./itemPage.css";
 import { useStorage } from "../../hooks/useStorage";
 
 interface ItemPageProps {
-  beerItem: IBeerItem | ''
+  beerItem: IBeerItem | "";
 }
 
 export default function ItemPage({ beerItem }: ItemPageProps) {
   const { selected, addSelected, removeSelected } = useStorage();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const addBeer = async (item: IBeerItem) => {
     await addSelected(item);
   };
 
-
-  if (beerItem === '') {
-    return (<div>Что-то пошло не так</div>)
+  if (beerItem === "") {
+    return (
+      <div>
+        Что-то пошло не так
+        <IonButton onClick={() => navigate(`/`)} color="medium">
+          Назад
+          <IonIcon slot="start" icon={arrowBack}></IonIcon>
+        </IonButton>
+      </div>
+    );
   }
+
+  const showAddButton = () => {
+    const check = selected.filter((el) => el.id === beerItem.id)
+    if (check.length > 0) {
+      return (
+        <IonButton disabled={true} color="success">
+          Избранное
+          <IonIcon slot="end" icon={star}></IonIcon>
+        </IonButton>
+      )
+    } else {
+      return (
+          <IonButton onClick={() => addBeer(beerItem)} color="success">
+          Добавить в избранное
+          <IonIcon slot="end" icon={star}></IonIcon>
+        </IonButton>
+        )
+    }
+  }
+  // showAddButton(beerItem)
 
   return (
     <IonCard color="light" className="itempage-card">
@@ -56,15 +83,17 @@ export default function ItemPage({ beerItem }: ItemPageProps) {
             })}
           </div>
         </div>
-      </IonCardContent>
+      </IonCardContent> 
       <div className="itempage-button-block">
-        <IonButton onClick={() => addBeer(beerItem)} color='success' >
+        {showAddButton()}
+        {/* <IonButton onClick={() => addBeer(beerItem)} color="success">
           Добавить в избранное
           <IonIcon slot="end" icon={star}></IonIcon>
-        </IonButton>
+        </IonButton> */}
       </div>
+
       <div className="itempage-button-block">
-        <IonButton onClick={() => navigate(`/`)} color='medium'>
+        <IonButton onClick={() => navigate(`/`)} color="medium">
           Назад
           <IonIcon slot="start" icon={arrowBack}></IonIcon>
         </IonButton>
