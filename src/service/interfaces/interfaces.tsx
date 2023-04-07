@@ -1,17 +1,17 @@
-export interface IBeerList extends Array<IBeeritem>{}
+export interface IBeerList extends Array<IBeerItem>{}
 
 // поскольку не все параметры использую, для экономии времени сделала часть с типом any
-export interface IBeeritem {
-    id: Number,
-    name: String,
-    tagline: String,
-    first_brewed: String,
-    description: String,
-    image_url: String,
-    abv: Number,
-    ibu: Number,
-    target_fg: 1005,
-    target_og: 1045,
+export interface IBeerItem {
+    id: number,
+    name: string,
+    tagline: string,
+    first_brewed: string,
+    description: string,
+    image_url: string,
+    abv: number,
+    ibu: number,
+    target_fg: number,
+    target_og: number,
     ebc: 15,
     srm: 7.5,
     ph: 4.4,

@@ -1,0 +1,22 @@
+/* ion-card {
+  --width: 200px;
+  --color: red;
+}
+
+ion-card-title {
+  --color: red;
+}
+
+ion-card-subtitle {
+  --color: #d1fff8;
+} */
+.ion-card {
+    width: 100%;
+    padding-bottom: 8px;
+}
+.card-image {
+    float: left;
+    width:  100%;
+    height: 250px;
+    object-fit: contain;
+}

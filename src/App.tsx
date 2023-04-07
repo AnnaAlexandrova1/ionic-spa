@@ -1,8 +1,7 @@
 import React from "react";
 import '@ionic/react/css/core.css'
 import { setupIonicReact } from '@ionic/react';
-import { IonApp, IonPage } from "@ionic/react";
-
+import { IonApp, IonPage, IonHeader, IonContent } from "@ionic/react";
 import MainPage from "./pages/MainPage/MainPage";
 import Logo from "./components/Logo/Logo";
 // import * as ROUTES from "./service/routes/routes";
@@ -14,10 +13,15 @@ setupIonicReact();
 function App() {
   return (
     <IonApp>
-      <IonPage>
+      <IonHeader>
+        <div className="header-container">
           <Logo />
-          <MainPage />
-      </IonPage>
+        </div>
+        </IonHeader>
+        
+        <IonContent>
+           <MainPage />
+        </IonContent>
     </IonApp>
   );
 }

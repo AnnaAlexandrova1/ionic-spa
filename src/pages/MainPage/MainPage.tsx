@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getBeerList } from "../../service/api/requests";
-import { IonPage } from "@ionic/react";
+import { IonPage, IonGrid, IonRow, IonCol, IonContent, IonList, IonItem   } from "@ionic/react";
 import { IBeerList } from "../../service/interfaces/interfaces";
+import CartItem from "../../components/CardItem/CardItem";
 
 export default function MainPage() {
   const [page, setPage] = useState<number>(1);
@@ -20,11 +21,23 @@ export default function MainPage() {
       });
   };
 
+
+
   useEffect(() => {
     getBeer();
   }, []);
     
      console.log(beerList)
     
-  return <IonPage></IonPage>;
+  return (<IonPage>
+    <IonContent>
+      <IonList>
+        {beerList.map((item) => { 
+          return  (<IonItem key={item.id}>
+            <CartItem item = {item } />
+          </IonItem>)
+        })}
+      </IonList>
+ </IonContent>  
+  </IonPage>);
 }
