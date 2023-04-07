@@ -3,6 +3,8 @@ import { getBeerList } from "../../service/api/requests";
 import { IonPage, IonGrid, IonRow, IonCol, IonContent, IonList, IonItem   } from "@ionic/react";
 import { IBeerList } from "../../service/interfaces/interfaces";
 import CartItem from "../../components/CardItem/CardItem";
+import Loading from "../../components/Loading/Loading";
+import Error from "../../components/Error/Error";
 
 export default function MainPage() {
   const [page, setPage] = useState<number>(1);
@@ -22,10 +24,17 @@ export default function MainPage() {
   };
 
 
-
   useEffect(() => {
     getBeer();
   }, []);
+
+   if (loading) {
+      return <Loading />
+  }
+  
+    if (error) {
+      return <Error />
+    }
     
      console.log(beerList)
     
