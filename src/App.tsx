@@ -6,8 +6,14 @@ import { IonApp, IonHeader, IonContent, IonButton } from "@ionic/react";
 import { star } from "ionicons/icons";
 import { setupIonicReact } from "@ionic/react";
 
-import { getBeerList } from './service/api/requests'
-import { ISelected, IStatus, IBeerItem, IBeerList } from "./service/interfaces/interfaces";
+import { getBeerList } from "./service/api/requests";
+import {
+  ISelected,
+  IStatus,
+  IBeerItem,
+  IBeerList,
+} from "./service/interfaces/interfaces";
+import Layout from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
 import ItemPage from "./pages/ItemPage/ItemPage";
 import SelectedModal from "./pages/SelectedModal/SelectedModal";
@@ -18,14 +24,20 @@ import "./App.css";
 
 setupIonicReact();
 
-
 function App() {
-  const [selected, setSelected] = useState<ISelected>({ page: 1, id: "", beerItem: '' });
+  const [selected, setSelected] = useState<ISelected>({
+    page: 1,
+    id: "",
+    beerItem: "",
+  });
   const [beerList, setBeerList] = useState<IBeerList | []>([]);
-  const [status, setStatus] = useState<IStatus>({ loading: true, error: false, });
+  const [status, setStatus] = useState<IStatus>({
+    loading: true,
+    error: false,
+  });
   const [isOpen, setIsOpen] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getBeer = () => {
     getBeerList(selected.page)
@@ -49,38 +61,44 @@ function App() {
   const handleOnPageClick = (elem: number) => {
     setSelected({ ...selected, page: elem });
   };
-  
+
   const handleOnCardClick = (num: number) => {
-    const e:IBeerItem = beerList.filter((item) => item.id === num)[0]
+    const e: IBeerItem = beerList.filter((item) => item.id === num)[0];
     setSelected({ ...selected, id: num, beerItem: e });
     navigate(`/itemPage`);
   };
-  
+
   const showModal = () => {
     if (isOpen) {
-      return <SelectedModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      return <SelectedModal isOpen={isOpen} setIsOpen={setIsOpen} />;
     } else {
-      return null
+      return null;
     }
-  }
-  
+  };
+
   return (
     <IonApp>
       {showModal()}
-      <IonHeader>
-        <div className="header-container">
-          <Logo />
-          <IonButton color='medium' onClick={() => setIsOpen(true)}>Избранное</IonButton>
-        </div>
-      </IonHeader>
-
-      <IonContent>
-        <Routes>
-          <Route path="/" index element={<MainPage selected={selected} beerList={beerList} status={status}
-            handleOnPageClick={handleOnPageClick} handleOnCardClick={handleOnCardClick} />} />
-          <Route path="itemPage" element={<ItemPage beerItem={selected.beerItem} />} />
-        </Routes>
-      </IonContent>
+      <Routes>
+        <Route path="/" element={<Layout setIsOpen={setIsOpen} />}>
+          <Route
+            index
+            element={
+              <MainPage
+                selected={selected}
+                beerList={beerList}
+                status={status}
+                handleOnPageClick={handleOnPageClick}
+                handleOnCardClick={handleOnCardClick}
+              />
+            }
+          />
+          <Route
+            path="itemPage"
+            element={<ItemPage beerItem={selected.beerItem} />}
+          />
+        </Route>
+      </Routes>
     </IonApp>
   );
 }
