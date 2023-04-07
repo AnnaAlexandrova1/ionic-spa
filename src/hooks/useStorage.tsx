@@ -23,15 +23,11 @@ export function useStorage() {
     }, [])
   
     const addSelected = async (item: IBeerItem) => {
-        const newSelected = item;
-        // if (selected.findIndex((item) => item.id === newSelected.id) === -1) {
-        //   setSelected([...selected, newSelected])  
-        // } 
-        setSelected([...selected, newSelected]) 
-
-        console.log(selected)
-        // console.log(selected.findIndex((item) => item.id === newSelected.id) )
-        return store?.set(TODOS_KEY, selected)
+        if (selected.findIndex((elem) => elem.id === item.id) === -1) {
+          selected.push(item)  
+        } 
+        setSelected(selected)  
+       store?.set(TODOS_KEY, selected)
     }
 
     const removeSelected = async (id: number) => {
