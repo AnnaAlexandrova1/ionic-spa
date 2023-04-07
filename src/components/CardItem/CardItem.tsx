@@ -5,16 +5,17 @@ import { IBeerItem } from "../../service/interfaces/interfaces";
 import './cardItem.css'
 
 interface CartItemProps {
-    item: IBeerItem
+  item: IBeerItem, 
+  handleOnCardClick: Function
 }
 
 
-export default function CartItem({ item }: CartItemProps) {
+export default function CartItem({ item, handleOnCardClick }: CartItemProps) {
 
   return (
     <IonCard color='light'
       className='ion-card'
-      onClick={() => {}}>
+      onClick={() => handleOnCardClick(item.id)}>
        <IonCardHeader>
             <IonCardTitle>
               {item.name}

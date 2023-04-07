@@ -54,10 +54,12 @@ export default function MainPage() {
     setSelected({...selected, page:elem});
   };
 
-  const handleOnCardClick = (elem: number) => {
-      navigate(`/itemPage`)
+  const handleOnCardClick = (num: number) => {
+    setSelected({...selected, id: num});
+    navigate(`/itemPage`)
   }
-
+ 
+  console.log(selected.id)
   return (
     <IonPage>
       <IonContent>
@@ -65,7 +67,7 @@ export default function MainPage() {
           {beerList.map((item) => {
             return (
               <IonItem key={item.id}>
-                <CartItem item={item} />
+                <CartItem item={item} handleOnCardClick={handleOnCardClick} />
               </IonItem>
             );
           })}
