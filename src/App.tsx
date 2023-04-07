@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ISelected, IStatus, IBeerItem, IBeerList  } from "./service/interfaces/interfaces";
-import { getBeerList } from './service/api/requests'
-import "@ionic/react/css/core.css";
 import { Routes, Route } from "react-router";
-import { setupIonicReact } from "@ionic/react";
+
 import { IonApp, IonHeader, IonContent } from "@ionic/react";
+import { setupIonicReact } from "@ionic/react";
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+
+import { getBeerList } from './service/api/requests'
+import { ISelected, IStatus, IBeerItem, IBeerList } from "./service/interfaces/interfaces";
 import MainPage from "./pages/MainPage/MainPage";
 import ItemPage from "./pages/ItemPage/ItemPage";
 import Logo from "./components/Logo/Logo";
+
+import "@ionic/react/css/core.css";
 import "./App.css";
 
 setupIonicReact();
+
 
 function App() {
   const [selected, setSelected] = useState<ISelected>({ page: 1, id: "", beerItem: '' });
@@ -44,12 +49,11 @@ function App() {
   };
   
   const handleOnCardClick = (num: number) => {
-    const e: IBeerItem = beerList.filter((item) => item.id === num)
-    setSelected({ ...selected, id: num, beerItem: e[0] });
+    const e:IBeerItem = beerList.filter((item) => item.id === num)[0]
+    setSelected({ ...selected, id: num, beerItem: e });
     navigate(`/itemPage`);
   };
 
-  console.log(selected.beerItem)
   return (
     <IonApp>
       <IonHeader>
