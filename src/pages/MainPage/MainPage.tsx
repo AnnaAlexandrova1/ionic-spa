@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getBeerList } from "../../service/api/requests";
-import { IonPage, IonGrid, IonRow, IonCol, IonContent, IonList, IonItem   } from "@ionic/react";
+import {
+  IonPage,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonContent,
+  IonList,
+  IonItem,
+} from "@ionic/react";
 import { IBeerList } from "../../service/interfaces/interfaces";
 import CartItem from "../../components/CardItem/CardItem";
 import Loading from "../../components/Loading/Loading";
@@ -13,9 +21,9 @@ export default function MainPage() {
   const [loading, setLoading] = useState<Boolean>(true);
   const [error, setError] = useState<Boolean>(false);
 
-    const getBeer = () => {
+  const getBeer = () => {
     getBeerList(page)
-        .then((res) => {
+      .then((res) => {
         setBeerList(res);
         setLoading(false);
       })
@@ -24,31 +32,40 @@ export default function MainPage() {
       });
   };
 
-
   useEffect(() => {
     getBeer();
   }, []);
 
-   if (loading) {
-      return <Loading />
+   useEffect(() => {
+    getBeer();
+  }, [page]);
+
+  if (loading) {
+    return <Loading />;
   }
-  
-    if (error) {
-      return <Error />
-    }
-    
-     console.log(beerList)
-    
-  return (<IonPage>
-    <IonContent>
-      <IonList>
-        {beerList.map((item) => { 
-          return  (<IonItem key={item.id}>
-            <CartItem item = {item } />
-          </IonItem>)
-        })}
-      </IonList>
-      <Pagination/>
- </IonContent>  
-  </IonPage>);
+
+  if (error) {
+    return <Error />;
+  }
+
+  const handleOnPageClick = (elem: number) => {
+    setPage(elem);
+  };
+
+  return (
+    <IonPage>
+      <IonContent>
+        <IonList>
+          {beerList.map((item) => {
+            return (
+              <IonItem key={item.id}>
+                <CartItem item={item} />
+              </IonItem>
+            );
+          })}
+        </IonList>
+        <Pagination page={page} handleOnPageClick={handleOnPageClick} />
+      </IonContent>
+    </IonPage>
+  );
 }

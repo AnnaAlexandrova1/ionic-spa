@@ -16,3 +16,7 @@
     text-align: center;
 }
 
+.pagination-item.checked { 
+    background-color: #545454;   
+}
+
