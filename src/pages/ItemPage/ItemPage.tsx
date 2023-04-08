@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { IBeerItem } from "../../service/interfaces/interfaces";
 import {
@@ -19,18 +20,20 @@ interface ItemPageProps {
 }
 
 export default function ItemPage({ beerItem }: ItemPageProps) {
+  const [click, setClick] = useState<Boolean>(false)
   const { selected, addSelected, removeSelected } = useStorage();
   const navigate = useNavigate();
 
   const addBeer = async (item: IBeerItem) => {
     await addSelected(item);
+    await setClick(true)
   };
 
   if (beerItem === "") {
     return (
       <div>
         Что-то пошло не так
-        <IonButton onClick={() => navigate(`/`)} color="medium">
+        <IonButton onClick={() => navigate(`/ionic-spa`)} color="medium">
           Назад
           <IonIcon slot="start" icon={arrowBack}></IonIcon>
         </IonButton>
@@ -49,7 +52,7 @@ export default function ItemPage({ beerItem }: ItemPageProps) {
       )
     } else {
       return (
-          <IonButton onClick={() => addBeer(beerItem)} color="success">
+          <IonButton onClick={() => addBeer(beerItem)} color="success" disabled={click}>
           Добавить в избранное
           <IonIcon slot="end" icon={star}></IonIcon>
         </IonButton>
@@ -86,14 +89,10 @@ export default function ItemPage({ beerItem }: ItemPageProps) {
       </IonCardContent> 
       <div className="itempage-button-block">
         {showAddButton()}
-        {/* <IonButton onClick={() => addBeer(beerItem)} color="success">
-          Добавить в избранное
-          <IonIcon slot="end" icon={star}></IonIcon>
-        </IonButton> */}
       </div>
 
       <div className="itempage-button-block">
-        <IonButton onClick={() => navigate(`/main`)} color="medium">
+        <IonButton onClick={() => navigate(`/`)} color="medium">
           Назад
           <IonIcon slot="start" icon={arrowBack}></IonIcon>
         </IonButton>

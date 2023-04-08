@@ -17,7 +17,6 @@ import Layout from "./components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
 import ItemPage from "./pages/ItemPage/ItemPage";
 import SelectedModal from "./pages/SelectedModal/SelectedModal";
-import Logo from "./components/Logo/Logo";
 
 import "@ionic/react/css/core.css";
 import "./App.css";
@@ -65,7 +64,7 @@ function App() {
   const handleOnCardClick = (num: number) => {
     const e: IBeerItem = beerList.filter((item) => item.id === num)[0];
     setSelected({ ...selected, id: num, beerItem: e });
-    navigate(`/main/itemPage`);
+    navigate(`/itemPage`);
   };
 
   const showModal = () => {
@@ -77,10 +76,11 @@ function App() {
   };
 
   return (
+
     <IonApp>
       {showModal()}
       <Routes>
-        <Route path="/main" element={<Layout setIsOpen={setIsOpen} />}>
+        <Route path="/" element={<Layout setIsOpen={setIsOpen} />}>
           <Route
             index
             element={
@@ -93,13 +93,14 @@ function App() {
               />
             }
           />
-          <Route
-            path="/main/itemPage"
+          <Route 
+            path="/itemPage"
             element={<ItemPage beerItem={selected.beerItem} />}
           />
         </Route>
       </Routes>
-    </IonApp>
+      </IonApp>
+   
   );
 }
 
