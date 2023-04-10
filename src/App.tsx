@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState} from "react";
+import { useNavigate, } from "react-router-dom";
 import { Routes, Route } from "react-router";
 
-import { IonApp, IonHeader, IonContent, IonButton } from "@ionic/react";
-import { star } from "ionicons/icons";
+import { IonApp} from "@ionic/react";
 import { setupIonicReact } from "@ionic/react";
 
-import { getBeerList } from "./service/api/requests";
+import { getBeerList} from "./service/api/requests";
 import {
   ISelected,
   IStatus,
@@ -18,8 +17,11 @@ import MainPage from "./pages/MainPage/MainPage";
 import ItemPage from "./pages/ItemPage/ItemPage";
 import SelectedModal from "./pages/SelectedModal/SelectedModal";
 
+
 import "@ionic/react/css/core.css";
 import "./App.css";
+
+
 
 setupIonicReact();
 
@@ -33,6 +35,7 @@ function App() {
   const [status, setStatus] = useState<IStatus>({
     loading: true,
     error: false,
+    errStatus: true,
   });
   const [isOpen, setIsOpen] = useState(false);
 
@@ -45,7 +48,12 @@ function App() {
         setStatus({ ...status, loading: false });
       })
       .catch((err) => {
-        setStatus({ ...status, error: true });
+        // Toast элемент если превышено количество запросов (больше 1 запроса за секунду)
+        if (err.status === 429) {
+          setStatus({ ...status, errStatus: true })
+        } else {
+          setStatus({ ...status, error: true });
+        }
       });
   };
 
@@ -56,6 +64,7 @@ function App() {
   useEffect(() => {
     getBeer();
   }, [selected.page]);
+
 
   const handleOnPageClick = (elem: number) => {
     setSelected({ ...selected, page: elem });
@@ -75,8 +84,12 @@ function App() {
     }
   };
 
-  return (
+  // функция для показа Toast элемента
+  const setToastIsShown = () => {
+     setStatus({ ...status, errStatus: false})
+  }
 
+  return (
     <IonApp>
       {showModal()}
       <Routes>
@@ -90,6 +103,7 @@ function App() {
                 status={status}
                 handleOnPageClick={handleOnPageClick}
                 handleOnCardClick={handleOnCardClick}
+                setToastIsShown={setToastIsShown}
               />
             }
           />
@@ -98,7 +112,7 @@ function App() {
             element={<ItemPage beerItem={selected.beerItem} />}
           />
         </Route>
-      </Routes>
+        </Routes>
       </IonApp>
    
   );

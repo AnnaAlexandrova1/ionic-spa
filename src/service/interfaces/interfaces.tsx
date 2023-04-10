@@ -33,5 +33,6 @@ export interface ISelected {
 
 export interface IStatus {
     loading: boolean, 
-    error: boolean
+    error: boolean, 
+    errStatus: boolean
 }

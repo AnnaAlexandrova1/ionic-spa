@@ -20,7 +20,7 @@ interface ItemPageProps {
 }
 
 export default function ItemPage({ beerItem }: ItemPageProps) {
-  const [click, setClick] = useState<Boolean>(false)
+  const [click, setClick] = useState<boolean>(false)
   const { selected, addSelected, removeSelected } = useStorage();
   const navigate = useNavigate();
 
