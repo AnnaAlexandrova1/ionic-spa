@@ -1,15 +1,19 @@
 <h1 align="center">Тестовое задание</h2>
 
- **Сайт бронирования ж/д билетов**
+ **SPA c использованием Ionic Framework и Capacitor**
 
  [Ссылка на GitHub Pages - реализация](https://annaalexandrova1.github.io/ionic-spa/)
 
-* Запустить web - версию:
+Запустить web - версию:
 ```
 git clone https://github.com/AnnaAlexandrova1/ionic-spa.git
 cd react-ionic
 npm install
-npm start
+npm run start
+```
+Сборка под Андроид
+
 ```
 
+```
 

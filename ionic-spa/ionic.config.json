@@ -1,0 +1,7 @@
+{
+  "name": "ionic-spa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
